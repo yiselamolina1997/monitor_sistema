@@ -19,5 +19,6 @@ En consola de VS Code colocar y ejcutar estos comanado
    
 3. Ejecutar el servidor:
    python manage.py runserver
+   http://127.0.0.1:8000/
    
 
