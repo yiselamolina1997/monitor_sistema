@@ -9,14 +9,14 @@ def get_windows_full_name():
     sin depender de librerías externas como wmi.
     """
     try:
-        # Ejecuta el comando systeminfo y busca la línea con el nombre del sistema
+        # Ejecuta el comando systeminfo y busca la linea con el nombre del sistema
         output = subprocess.check_output("systeminfo", shell=True, text=True, encoding='utf-8', errors='ignore')
         for line in output.splitlines():
             if "Nombre del sistema operativo" in line or "OS Name" in line:
                 return line.split(":", 1)[1].strip()
     except Exception:
         pass
-    # Si no se logra obtener, devuelve una descripción genérica
+    # Si no se logra obtener, devuelve una descripcion generica
     return f"Windows {platform.release()} ({platform.version()})"
 
 
@@ -28,11 +28,11 @@ def home(request):
         disk = psutil.disk_usage('/')
         system_info = platform.uname()
 
-        # Información de CPU
+        # Informacion de CPU
         cpu_cores_physical = psutil.cpu_count(logical=False)
         cpu_cores_logical = psutil.cpu_count(logical=True)
 
-        # Información del sistema operativo
+        # Informacion del sistema operativo
         os_name = system_info.system
         os_version = system_info.version
 
