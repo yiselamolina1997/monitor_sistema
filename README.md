@@ -5,6 +5,9 @@
 - Kensy Valeska Garcia Paz 202310110180
 - Yisela Diney Molina Sosa 202010010089
 
+Link de video en youtube
+https://youtu.be/G45gDrBeJLg
+
 
 ## Descripción
 Aplicación web que muestra en tiempo real el uso del CPU, memoria RAM, disco y detalles del sistema operativo.
