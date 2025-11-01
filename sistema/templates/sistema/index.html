@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitoreo del Sistema</title>
+    <style>
+        /* ---- Estilos generales ---- */
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #121212, #2b2b2b);
+            color: #eaeaea;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* ---- Encabezado ---- */
+        header {
+            background: linear-gradient(90deg, #000000, #434343);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid #333;
+            letter-spacing: 1px;
+            animation: fadeDown 1.2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* ---- Contenedor principal ---- */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            animation: fadeUp 1.3s ease-in-out;
+        }
+
+        /* ---- Tarjetas ---- */
+        .card {
+            background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6),
+                        inset 0 1px 3px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid #444;
+            position: relative;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15),
+                        inset 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+
+        .card h2 {
+            font-size: 1.3em;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+            letter-spacing: 0.5px;
+        }
+
+        .card p {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #b3b3b3;
+            text-shadow: 0 0 5px rgba(255,255,255,0.1);
+        }
+
+        /* ---- Botón ---- */
+        .button-container {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeUp 1.5s ease-in-out;
+        }
+
+        button {
+            background: linear-gradient(90deg, #111, #555);
+            color: #fff;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1em;
+            border-radius: 40px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.15);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #555, #111);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255,255,255,0.25);
+        }
+
+        /* ---- Footer ---- */
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9em;
+            border-top: 1px solid #333;
+            box-shadow: 0 -4px 8px rgba(255,255,255,0.05);
+        }
+
+        /* ---- Animaciones ---- */
+        @keyframes fadeUp {
+            from {opacity: 0; transform: translateY(25px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes fadeDown {
+            from {opacity: 0; transform: translateY(-25px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Monitoreo del Sistema</h1>
+    </header>
+
+    {% if data.error %}
+        <p style="text-align:center; color:red;">Error: {{ data.error }}</p>
+    {% else %}
+    <div class="container">
+        <div class="card">
+            <h2>Uso del CPU</h2>
+            <p>{{ data.cpu_percent }}%</p>
+        </div>
+        <div class="card">
+            <h2>Memoria RAM</h2>
+            <p>{{ data.ram_used }} GB / {{ data.ram_total }} GB ({{ data.ram_percent }}%)</p>
+        </div>
+        <div class="card">
+            <h2>Almacenamiento</h2>
+            <p>{{ data.disk_used }} GB usados / {{ data.disk_total }} GB</p>
+        </div>
+        <div class="card">
+            <h2>Sistema Operativo</h2>
+            <p>{{ data.os }}</p>
+            <p>Versión: {{ data.version }}</p>
+        </div>
+        <div class="card">
+            <h2>Procesador</h2>
+            <p>{{ data.processor }}</p>
+            <p>{{ data.cpu_cores_physical }} núcleos físicos / {{ data.cpu_cores_logical }} lógicos</p>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="location.reload()">Actualizar Datos</button>
+    </div>
+    {% endif %}
+
+    <footer>
+        Proyecto Segundo Parcial — Monitoreo del Sistema con Django y Psutil
+    </footer>
+</body>
+</html>
+
